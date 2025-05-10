@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem 7 - Array Sorting</title>
+</head>
+<body>
+    <nav>
+        <a href="one.html">Problem 1</a> |
+        <a href="two.html">Problem 2</a> |
+        <a href="three.html">Problem 3</a> |
+        <a href="four.html">Problem 4</a> |
+        <a href="five.html">Problem 5</a> |
+        <a href="six.html">Problem 6</a> |
+        <a href="seven.html">Problem 7</a> |
+        <a href="eight.html">Problem 8</a> |
+        <a href="nine.html">Problem 9</a>
+    </nav> 
+    <br><br>
+    <h1>Problem 7 - Array Sorting</h1><br>
+    <div>
+        <h3>Original Array:</h3>
+        <p id="originalArray"></p>
+        
+        <h3>Sorted Array (Ascending Order):</h3>
+        <p id="sortedArray"></p>
+
+        <script>
+            let numbers = [10, 1, 52, 5, 500, 60, 11];
+            
+            
+            document.getElementById("originalArray").textContent = `[${numbers.join(', ')}]`;
+            
+            
+            numbers.sort((a, b) => a - b);
+            
+           
+            document.getElementById("sortedArray").textContent = `[${numbers.join(', ')}]`;
+            
+            
+            console.log("Sorted Array:", numbers);
+        </script>
+    </div>
+</body>
+</html>

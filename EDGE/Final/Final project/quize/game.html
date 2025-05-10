@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Picture Quiz Game</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header, footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+    }
+    header {
+      padding: 20px 0;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+    }
+    footer {
+      background-color: #eee;
+      color: #333;
+      padding: 20px;
+      font-size: 14px;
+    }
+    h1, h2 {
+      margin-bottom: 20px;
+    }
+    .restart-btn {
+      padding: 12px 25px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .restart-btn:hover {
+      background-color: #45a049;
+    }
+    .question-img {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      margin: 20px 0;
+      border-radius: 10px;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .option-btn {
+      padding: 10px 20px;
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 200px;
+    }
+    .option-btn:hover {
+      background-color: #0b7dda;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="score.html">Result</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- This will be replaced with the first question once the page loads -->
+  </main>
+
+  <footer>
+    Developed by Jannatul Mawya Sony
+  </footer>
+
+  <script>
+    const quizData = [
+      { question: "Which animal is this?", image: "images/lion.jpeg", options: ["Lion", "Tiger", "Leopard", "Cheetah"], answer: "Lion" },
+      { question: "Which animal is this?", image: "images/giraffe.jpeg", options: ["Giraffe", "Camel", "Deer", "Horse"], answer: "Giraffe" },
+      { question: "Which animal is this?", image: "images/elephant.jpeg", options: ["Elephant", "Rhino", "Hippo", "Ox"], answer: "Elephant" },
+      { question: "Which animal is this?", image: "images/zebra.jpeg", options: ["Zebra", "Horse", "Donkey", "Goat"], answer: "Zebra" },
+      { question: "Which animal is this?", image: "images/panda.jpeg", options: ["Panda", "Bear", "Raccoon", "Koala"], answer: "Panda" },
+      { question: "Which animal is this?", image: "images/penguin.jpeg", options: ["Penguin", "Duck", "Goose", "Albatross"], answer: "Penguin" },
+      { question: "Which animal is this?", image: "images/kangaroo.jpeg", options: ["Kangaroo", "Wallaby", "Deer", "Rabbit"], answer: "Kangaroo" },
+      { question: "Which animal is this?", image: "images/fox.jpeg", options: ["Fox", "Wolf", "Dog", "Coyote"], answer: "Fox" },
+      { question: "Which animal is this?", image: "images/crocodile.jpeg", options: ["Crocodile", "Alligator", "Lizard", "Snake"], answer: "Crocodile" },
+      { question: "Which animal is this?", image: "images/monkey.jpeg", options: ["Monkey", "Chimpanzee", "Gorilla", "Baboon"], answer: "Monkey" }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    // Start the game immediately when the page loads
+    window.onload = startGame;
+
+    function startGame() {
+      currentQuestion = 0;
+      score = 0;
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = quizData[currentQuestion];
+      document.getElementById("main-content").innerHTML = `
+        <h2>${q.question}</h2>
+        <img class="question-img" src="${q.image}" alt="Animal Image">
+        <div class="options">
+          ${q.options.map(option => 
+            `<button class="option-btn" onclick="selectAnswer('${option}')">${option}</button>`
+          ).join('')}
+        </div>
+      `;
+    }
+
+    function selectAnswer(selected) {
+      const correct = quizData[currentQuestion].answer;
+      if (selected === correct) score++;
+      currentQuestion++;
+      if (currentQuestion < quizData.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("main-content").innerHTML = `
+        <h2>Quiz Completed!</h2>
+        <p>You answered ${score} out of ${quizData.length} correctly.</p>
+        <button class="restart-btn" onclick="startGame()">Restart</button>
+      `;
+    }
+  </script>
+</body>
+</html>
